@@ -391,14 +391,22 @@ def cornersHeuristic(state, problem):
     #corner2 = ((xy1[0] - xy3[0]) ** 2 + (xy1[1] - xy3[1]) ** 2 ) ** 0.5
     #corner3 = ((xy1[0] - xy4[0]) ** 2 + (xy1[1] - xy4[1]) ** 2 ) ** 0.5
     #corner4 = ((xy1[0] - xy5[0]) ** 2 + (xy1[1] - xy5[1]) ** 2 ) ** 0.5
+    cornerValue=[abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1]),abs(xy1[0] - xy3[0]) + abs(xy1[1] - xy3[1]),abs(xy1[0] - xy4[0]) + abs(xy1[1] - xy4[1]),abs(xy1[0] - xy5[0]) + abs(xy1[1] - xy5[1])]
 
-    corner1 = abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1])
-    corner2 = abs(xy1[0] - xy3[0]) + abs(xy1[1] - xy3[1])
-    corner3 = abs(xy1[0] - xy4[0]) + abs(xy1[1] - xy4[1])
-    corner4 = abs(xy1[0] - xy5[0]) + abs(xy1[1] - xy5[1])
+    minArray=list()
+    if state[1][0] == False:
+        minArray.append(cornerValue[0])
+    if state[1][1] == False:
+        minArray.append(cornerValue[1])
+    if state[1][2] == False:
+        minArray.append(cornerValue[2])
+    if state[1][3] == False:
+        minArray.append(cornerValue[3])
 
-    
-    return min(corner1, corner2, corner3, corner4) 
+    if not len(minArray) == 0:
+        return min(minArray)
+    else:
+        return 0
     #return 0 # Default to trivial solution
 
 class AStarCornersAgent(SearchAgent):
