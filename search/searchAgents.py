@@ -1,3 +1,4 @@
+
 # searchAgents.py
 # ---------------
 # Licensing Information:  You are free to use or extend these projects for
@@ -288,6 +289,7 @@ class CornersProblem(search.SearchProblem):
         # Please add any code here which you would like to use
         # in initializing the problem
         "*** YOUR CODE HERE ***"
+        
 
     def getStartState(self):
         """
@@ -295,6 +297,7 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
+        return (self.startingPosition,[False,False,False,False])
         util.raiseNotDefined()
 
     def isGoalState(self, state):
@@ -302,6 +305,9 @@ class CornersProblem(search.SearchProblem):
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
+        isGoal = ((state == (self.corners[0],[True,True,True,True])) or (state == (self.corners[1],[True,True,True,True])) or (state == (self.corners[2],[True,True,True,True])) or (state == (self.corners[3],[True,True,True,True]))) 
+
+        return isGoal
         util.raiseNotDefined()
 
     def getSuccessors(self, state):
@@ -325,7 +331,23 @@ class CornersProblem(search.SearchProblem):
             #   hitsWall = self.walls[nextx][nexty]
 
             "*** YOUR CODE HERE ***"
-
+            x,y = state[0]
+            dx, dy = Actions.directionToVector(action)
+            nextx, nexty = int(x + dx), int(y + dy)
+            if not self.walls[nextx][nexty]:
+                nextState = (nextx, nexty)
+                cost = 1
+                if nextState == self.corners[0]:
+                    successors.append( ( (nextState,[True or state[1][0],False or state[1][1],False or state[1][2],False or state[1][3]]), action, cost) )
+                elif nextState == self.corners[1]:
+                    successors.append( ( (nextState,[False or state[1][0],True or state[1][1],False or state[1][2],False or state[1][3]]), action, cost) )
+                elif nextState == self.corners[2]:
+                    successors.append( ( (nextState,[False or state[1][0],False or state[1][1],True or state[1][2],False or state[1][3]]), action, cost) )
+                elif nextState == self.corners[3]:
+                    successors.append( ( (nextState,[False or state[1][0],False or state[1][1],False or state[1][2],True or state[1][3]]), action, cost) )
+                else:
+                    successors.append( ( (nextState,[False or state[1][0],False or state[1][1],False or state[1][2],False or state[1][3]]), action, cost) )
+                
         self._expanded += 1 # DO NOT CHANGE
         return successors
 
