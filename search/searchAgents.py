@@ -387,10 +387,7 @@ def cornersHeuristic(state, problem):
     xy3 = corners[1]
     xy4 = corners[2]
     xy5 = corners[3]
-    #corner1 = ((xy1[0] - xy2[0]) ** 2 + (xy1[1] - xy2[1]) ** 2 ) ** 0.5
-    #corner2 = ((xy1[0] - xy3[0]) ** 2 + (xy1[1] - xy3[1]) ** 2 ) ** 0.5
-    #corner3 = ((xy1[0] - xy4[0]) ** 2 + (xy1[1] - xy4[1]) ** 2 ) ** 0.5
-    #corner4 = ((xy1[0] - xy5[0]) ** 2 + (xy1[1] - xy5[1]) ** 2 ) ** 0.5
+
     cornerValue=[abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1]),abs(xy1[0] - xy3[0]) + abs(xy1[1] - xy3[1]),abs(xy1[0] - xy4[0]) + abs(xy1[1] - xy4[1]),abs(xy1[0] - xy5[0]) + abs(xy1[1] - xy5[1])]
 
     minArray=list()
@@ -404,7 +401,7 @@ def cornersHeuristic(state, problem):
         minArray.append(cornerValue[3])
 
     if not len(minArray) == 0:
-        return min(minArray)
+        return max(minArray)
     else:
         return 0
     #return 0 # Default to trivial solution
